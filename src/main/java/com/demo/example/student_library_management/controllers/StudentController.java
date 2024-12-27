@@ -39,4 +39,10 @@ public String deleteStudentById(@PathVariable int id){
      String response = studentService.deleteStudentById(id);
      return response;
 }
-}
+    @PutMapping("/update/{id}")
+    public String updateStudentById(@PathVariable int id, @RequestBody StudentRequestDto studentRequestDto){
+        String response=studentService.updateStudentById(id,studentRequestDto);
+            return response;
+        }
+    }
+

@@ -7,6 +7,9 @@ import com.demo.example.student_library_management.repository.StudentRepository;
 import com.demo.example.student_library_management.requestDto.StudentRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,4 +49,24 @@ public class StudentService {
         studentRepository.deleteById(id);
         return id+" id of students is deleted";
     }
+
+    public String updateStudentById(int id,StudentRequestDto studentRequestDto){
+      Optional<Student> student=getStudentById(id);
+      if(student.isPresent()){
+          Student updatedStudent=student.get();
+          updatedStudent.setName(studentRequestDto.getName());
+          updatedStudent.setEmail(studentRequestDto.getEmail());
+          updatedStudent.setMobile(studentRequestDto.getMobile());
+          updatedStudent.setDob(studentRequestDto.getDob());
+          updatedStudent.setGender(studentRequestDto.getGender());
+          updatedStudent.setDept(studentRequestDto.getDept());
+          studentRepository.save(updatedStudent);
+          return "student with id " + id +" is updated";
+      }
+      else {
+          return "student with id " + id +" is not found";
+      }
+
+    }
+
 }
