@@ -44,5 +44,10 @@ public String deleteStudentById(@PathVariable int id){
         String response=studentService.updateStudentById(id,studentRequestDto);
             return response;
         }
+        @PatchMapping("/updateByMobile/{id}")
+        public String updateStudentByPatch(@PathVariable int id, @RequestParam String mobile){
+        String response=studentService.updateStudentByPatch(id,mobile);
+        return response;
+        }
     }
 

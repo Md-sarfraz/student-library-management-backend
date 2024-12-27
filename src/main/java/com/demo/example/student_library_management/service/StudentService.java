@@ -8,8 +8,7 @@ import com.demo.example.student_library_management.requestDto.StudentRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -68,5 +67,16 @@ public class StudentService {
       }
 
     }
-
+public String updateStudentByPatch(@PathVariable int id, @RequestParam String mobile){
+        Optional<Student> student=getStudentById(id);
+        if(student.isPresent()){
+            Student updatedStudent=student.get();
+            updatedStudent.setMobile(mobile);
+            studentRepository.save(updatedStudent);
+            return"student with id " + id +" mobile no is updated";
+        }
+        else {
+            return "student with id " + id +" is not found";
+        }
+}
 }
