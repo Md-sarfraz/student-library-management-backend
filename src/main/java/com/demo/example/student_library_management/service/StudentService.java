@@ -8,6 +8,7 @@ import com.demo.example.student_library_management.requestDto.StudentRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,5 +30,20 @@ public class StudentService {
     public Optional<Student> getStudentById(int id){
         Optional<Student> studentOptional=studentRepository.findById(id);
         return studentOptional;
+    }
+
+    public List<Student> getAllStudent(){
+       List<Student> studentList= studentRepository.findAll();
+       return studentList;
+    }
+
+    public String getStudentCount(){
+        long count=studentRepository.count();
+        return "the total number of students is " + count;
+    }
+
+    public String deleteStudentById(int id){
+        studentRepository.deleteById(id);
+        return id+" id of students is deleted";
     }
 }

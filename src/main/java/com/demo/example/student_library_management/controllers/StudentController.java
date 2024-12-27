@@ -6,6 +6,7 @@ import com.demo.example.student_library_management.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -22,5 +23,20 @@ public String saveStudent(@RequestBody StudentRequestDto studentRequestDto) {
 public Optional<Student> findStudentById(@PathVariable int id) {
         Optional<Student> student = studentService.getStudentById(id);
         return student;
+}
+@GetMapping("/findAll")
+public List<Student> findAllStudent(){
+        List<Student> students =studentService.getAllStudent();
+        return students;
+}
+@GetMapping("/count")
+public String countStudent(){
+       String response = studentService.getStudentCount();
+       return response;
+}
+@DeleteMapping("/delete/{id}")
+public String deleteStudentById(@PathVariable int id){
+     String response = studentService.deleteStudentById(id);
+     return response;
 }
 }
