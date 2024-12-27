@@ -1,5 +1,7 @@
 package com.demo.example.student_library_management.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,14 +27,17 @@ private String publisherName;
     @Column(name = "available_book")
 private boolean available;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn
     private Author author;
 
+    @JsonBackReference
     @JoinColumn
     @ManyToOne
     private Card card;
 
+    @JsonManagedReference
     @OneToMany(mappedBy ="book",cascade = CascadeType.ALL)
     private List<Transaction>transactionsOfBook=new ArrayList<Transaction>();
 }

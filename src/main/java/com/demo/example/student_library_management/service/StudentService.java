@@ -8,6 +8,8 @@ import com.demo.example.student_library_management.requestDto.StudentRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class StudentService {
     @Autowired
@@ -22,5 +24,10 @@ public class StudentService {
 
         studentRepository.save(student);
         return "saved successfully";
+    }
+
+    public Optional<Student> getStudentById(int id){
+        Optional<Student> studentOptional=studentRepository.findById(id);
+        return studentOptional;
     }
 }

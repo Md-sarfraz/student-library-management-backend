@@ -1,5 +1,6 @@
 package com.demo.example.student_library_management.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -8,6 +9,8 @@ import lombok.Data;
 @Data
 public class Student {
     @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 private int id;
     @Column(nullable = false)
 private String name;
@@ -21,6 +24,8 @@ private String dob;
 private String gender;
     @Column(nullable = false)
 private String dept;
+
+    @JsonManagedReference
     @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)
     private Card card;
 }

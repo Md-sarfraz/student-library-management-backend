@@ -1,5 +1,6 @@
 package com.demo.example.student_library_management.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,7 +23,13 @@ public class Author {
     @Column
     private String rating;
 
-
+    @JsonManagedReference
 @OneToMany(mappedBy = "author", cascade= CascadeType.ALL)
     private List<Book> bookByAuthor= new ArrayList<>();
+
+
+//    mappedBY=@JsonManagedReference
+  //  joinColumn=@JsonBackReference
+    // whenever use mappedBy than use JsonManagedReference annotation
+    // whenever use joinColumn than use JsonBackReference annotation
 }
