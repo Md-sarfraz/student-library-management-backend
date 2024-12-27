@@ -49,5 +49,12 @@ public String deleteStudentById(@PathVariable int id){
         String response=studentService.updateStudentByPatch(id,mobile);
         return response;
         }
+
+                      // pagination
+@GetMapping("/findByPage")
+    public List<Student> findStudentBasedOnPage(@RequestParam int pageNo, @RequestParam int pageSize){
+       List<Student> studentList=studentService.getAllStudentByPage(pageNo,pageSize);
+       return studentList;
+    }
     }
 

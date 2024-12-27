@@ -6,6 +6,8 @@ import com.demo.example.student_library_management.model.Student;
 import com.demo.example.student_library_management.repository.StudentRepository;
 import com.demo.example.student_library_management.requestDto.StudentRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,4 +81,11 @@ public String updateStudentByPatch(@PathVariable int id, @RequestParam String mo
             return "student with id " + id +" is not found";
         }
 }
+
+                         // pagination
+    public List<Student> getAllStudentByPage(int pageNo, int pageSize){
+       Page<Student> studentPage=studentRepository.findAll(PageRequest.of(pageNo,pageSize));
+       List<Student> studentList=studentPage.getContent();
+       return studentList;
+    }
 }
