@@ -8,6 +8,7 @@ import com.demo.example.student_library_management.requestDto.StudentRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -84,7 +85,7 @@ public String updateStudentByPatch(@PathVariable int id, @RequestParam String mo
 
                          // pagination
     public List<Student> getAllStudentByPage(int pageNo, int pageSize){
-       Page<Student> studentPage=studentRepository.findAll(PageRequest.of(pageNo,pageSize));
+       Page<Student> studentPage=studentRepository.findAll(PageRequest.of(pageNo,pageSize, Sort.by("name")));
        List<Student> studentList=studentPage.getContent();
        return studentList;
     }
