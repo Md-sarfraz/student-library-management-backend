@@ -62,5 +62,15 @@ public String deleteStudentById(@PathVariable int id){
         return student;
     }
 
+    @GetMapping("/findByDept")
+    public List<Student> findStudentByDept(@RequestParam String dept){
+       List<Student> studentList=studentService.getStudentByDept(dept);
+        return studentList;
+    }
+@GetMapping("/findByEmailAndDept")
+    public Student findByEmailAndDept(@RequestParam String email, @RequestParam String dept){
+        Student student=studentService.getStudentByEmailAndDept(email,dept);
+        return student;
+    }
     }
 

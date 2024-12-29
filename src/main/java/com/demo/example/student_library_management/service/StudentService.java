@@ -94,4 +94,14 @@ public String updateStudentByPatch(@PathVariable int id, @RequestParam String mo
         Student student=studentRepository.findByEmail(email);
         return student;
     }
+
+    public List<Student> getStudentByDept(String dept){
+        List<Student> studentList = studentRepository.findByDept(dept);
+        return studentList;
+    }
+
+    public Student getStudentByEmailAndDept(String email, String dept){
+        Student student= studentRepository.findByEmailAndDept(email, dept);
+        return student;
+    }
 }
