@@ -16,7 +16,4 @@ public interface StudentRepository extends JpaRepository<Student,Integer> {
     public Student findByEmailAndDept(String email, String dept);
     public List<Student> findByEmailOrDept(String email, String Dept);
 
-//    @Query(nativeQuery = true, value = "SELECT * FROM student WHERE dept = :dept1")
-//    public List<Student> findByDeptQuery(String dept);
-
 }
