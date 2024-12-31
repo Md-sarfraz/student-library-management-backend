@@ -34,7 +34,12 @@ public class StudentService {
 
     public Optional<Student> getStudentById(int id){
         Optional<Student> studentOptional=studentRepository.findById(id);
-        return studentOptional;
+        if(studentOptional.isPresent()){
+            return studentOptional;
+        }
+       else {
+           throw new RuntimeException("student with id " + id +" is not found");
+        }
     }
 
     public List<Student> getAllStudent(){
@@ -48,8 +53,15 @@ public class StudentService {
     }
 
     public String deleteStudentById(int id){
-        studentRepository.deleteById(id);
-        return id+" id of students is deleted";
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        if(studentOptional.isPresent()) {
+            studentRepository.deleteById(id);
+            return "student with id " + id +" is deleted";
+        }
+        else {
+            throw new RuntimeException("Student with id " + id + " is not found");
+        }
+
     }
 
     public String updateStudentById(int id,StudentRequestDto studentRequestDto){
@@ -66,7 +78,7 @@ public class StudentService {
           return "student with id " + id +" is updated";
       }
       else {
-          return "student with id " + id +" is not found";
+          throw new RuntimeException("student with id " + id +" is not found");
       }
 
     }
@@ -79,7 +91,7 @@ public String updateStudentByPatch(@PathVariable int id, @RequestParam String mo
             return"student with id " + id +" mobile no is updated";
         }
         else {
-            return "student with id " + id +" is not found";
+            throw new RuntimeException("student with id " + id +" is not found");
         }
 }
 
