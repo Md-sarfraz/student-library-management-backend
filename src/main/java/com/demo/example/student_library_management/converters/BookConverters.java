@@ -12,5 +12,6 @@ public class BookConverters {
         book.setGenre(bookRequestDto.getGenre());
         book.setAvailable(bookRequestDto.isAvailable());
         return book;
+
     }
 }
